@@ -59,7 +59,7 @@ def handle_mqtt_message(client, userdata, message):
         if len(data) == 4:
             # thedata = {'type': 1, 'lng': data[2], 'lat': data[3]}
 
-            mqtt.publish('/gps/P/867435050113653', '%s;%s;0'%(data[2],data[3]))
+            mqtt.publish('/gps/P/yourdeviceid', '%s;%s;0'%(data[2],data[3]))
 
 
     elif message.payload.decode()[:9] != "searching":
@@ -84,7 +84,7 @@ def handle_mqtt_message(client, userdata, message):
     else:
         ##如果gps没有找到卫星 就让4G模块把基站定位发过来
         if countSent == 0:
-            mqtt.publish('/gps/R/867435050113653', 'rrpc,getlocation')
+            mqtt.publish('/gps/R/yourdeviceid', 'rrpc,getlocation')
         countSent += 1
         if countSent == 20:
             countSent = 0
